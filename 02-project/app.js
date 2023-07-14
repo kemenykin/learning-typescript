@@ -1,7 +1,15 @@
-function add(n1, n2) {
-    return n1 + n2;
+// const person: {
+//     name: string;
+//     age: number;
+// } = {
+var person = {
+    name: 'Kinga',
+    age: 26,
+    hobbies: ['sports', 'cooking']
+};
+var favouriteActivities;
+console.log(person.name);
+for (var _i = 0, _a = person.hobbies; _i < _a.length; _i++) {
+    var hobby = _a[_i];
+    console.log(hobby.toUpperCase());
 }
-var number1 = 10;
-var number2 = 3.5;
-var result = add(number1, number2);
-console.log(result);
