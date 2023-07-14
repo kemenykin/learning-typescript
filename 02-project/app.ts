@@ -2,16 +2,20 @@
 //     name: string;
 //     age: number;
 // } = {
-    const person = {
+//     const person = {
+//     name: 'Kinga',
+//     age: 26,
+//     hobbies: ['sports', 'cooking'],
+//     role: [2, 'author']
+// }
+
+enum Role { ADMIN, READ_ONLY, AUTHOR};
+
+const person = {
     name: 'Kinga',
     age: 26,
-    hobbies: ['sports', 'cooking']
-}
+    hobbies: ['sports', 'cooking'],
+    role: Role.ADMIN
+};
 
-let favouriteActivities: string[];
-
-console.log(person.name);
-
-for (const hobby of person.hobbies) {
-    console.log(hobby.toUpperCase());
-}
+console.log(person.role);
