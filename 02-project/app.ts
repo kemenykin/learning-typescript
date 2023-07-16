@@ -1,21 +1,9 @@
-// const person: {
-//     name: string;
-//     age: number;
-// } = {
-//     const person = {
-//     name: 'Kinga',
-//     age: 26,
-//     hobbies: ['sports', 'cooking'],
-//     role: [2, 'author']
-// }
+function add(n1: number, n2: number) {
+    return n1 + n2;
+}
 
-enum Role { ADMIN, READ_ONLY, AUTHOR};
+function printResult(num: number) {
+    console.log('Result' + num);
+}
 
-const person = {
-    name: 'Kinga',
-    age: 26,
-    hobbies: ['sports', 'cooking'],
-    role: Role.ADMIN
-};
-
-console.log(person.role);
+console.log(printResult(add(5, 10)));
