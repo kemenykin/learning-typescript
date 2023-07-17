@@ -1,21 +1,9 @@
-function add(n1: number, n2: number) {
-    return n1 + n2;
+let userInput: unknown;
+userInput = 'Kinga';
+userInput = 5;
+
+function generateError(message: string, code: number) {
+    throw {message: message, code: code};
 }
 
-function printResult(num: number) {
-    console.log('Result' + num);
-}
-
-let combineValues: (a: number, b: number) => number;
-combineValues = add;
-
-console.log(combineValues(8, 8));
-
-function addAndHandle(n1: number, n2: number, cb: (num: number) => void) {
-    const result = n1 + n2;
-    cb(result);
-}
-
-addAndHandle(20, 10, (result) => {
-    console.log(result);
-})
+generateError('An error occured', 500);
