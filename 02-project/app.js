@@ -1,4 +1,5 @@
-var userInput;
+"use strict";
+let userInput;
 userInput = 'Kinga';
 userInput = 5;
 function generateError(message, code) {
