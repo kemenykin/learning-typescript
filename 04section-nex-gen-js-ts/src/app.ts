@@ -1,3 +1,9 @@
+const hobbies = ['Sports', 'Cooking'];
+const activeHobbies = ['Hiking'];
+
+activeHobbies.push(...hobbies);
+
+
 const person = {
     name: 'Kinga',
     age: 26
