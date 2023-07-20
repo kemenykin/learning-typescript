@@ -12,6 +12,25 @@ class Department {
         this.employees.push(employee);
     }
 }
-const accounting = new Department('Accounting', 'mo45');
+class ITDepartment extends Department {
+    constructor(id, admins) {
+        super(id, 'IT');
+        this.admins = admins;
+    }
+}
+const it = new ITDepartment('d1', ['Max']);
+class AccountingDepartment extends Department {
+    constructor(id, reports) {
+        super(id, 'Accounting');
+        this.reports = reports;
+    }
+    addReports(text) {
+        this.reports.push(text);
+    }
+    printReports() {
+        console.log(this.reports);
+    }
+}
+const accounting = new AccountingDepartment('d2', []);
 console.log(accounting);
 //# sourceMappingURL=app.js.map

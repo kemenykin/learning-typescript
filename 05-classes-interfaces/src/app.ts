@@ -15,6 +15,30 @@ class Department {
     }
 }
 
-const accounting = new Department('Accounting', 'mo45');
+class ITDepartment extends Department {
+    admins: string[];
+    constructor( id: string, admins: string[]) {
+        super(id, 'IT');
+        this.admins = admins;
+    }
+}
+
+const it = new ITDepartment('d1', ['Max']);
+
+class AccountingDepartment extends Department {
+    constructor(id: string, private reports: string[]) {
+        super(id, 'Accounting');
+    }
+
+    addReports(text: string) {
+        this.reports.push(text);
+    }
+
+    printReports() {
+        console.log(this.reports);
+    }
+}
+
+const accounting = new AccountingDepartment('d2', []);
 
 console.log(accounting);
