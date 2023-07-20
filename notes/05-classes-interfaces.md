@@ -219,3 +219,13 @@ class ITDepartment extends Department {
 }
 ```
 - another special Department: AccountingDepartment
+
+### Overriding Props & the "protected" modifier
+- we can also overide methods or props of our class
+- we can add a new method with the same name, but different logic
+- BUT if we have a private property, we cannot work with that - they are accessible in the class where it defined, not classes that inherit from that class
+- if we want to grant that access, we can switch the basic propetry from `private` to `protected`
+- so it is not just available in this class, but also in any class that extends this class
+So:
+- `you can override methods of your base class` and you can `add your own implementation`
+- `you also have control access to properties with` protected
