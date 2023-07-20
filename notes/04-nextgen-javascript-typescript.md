@@ -1,5 +1,5 @@
-}
 
+```
 const copiedPerson = { ...person }
 ```
 - in the code above, the copiedPerson variable points the same object as person, so it technically is not a copy
