@@ -186,3 +186,36 @@ class Product {
 ```
 
 ### Inheritance
+- we can implement specialized departments from the Department class
+- important: you can only inherit from one class, can't inherit from multiple classes
+- the new class (ITDepartment) inherits, automatically gets everything the base class, Department has - including its constructor
+- as long as we don't add a dedicated constructor for this inherited class
+```
+class ITDepartment extends Department {
+
+}
+
+const accounting = new ITDepartment('Accounting', 'mo45');
+```
+- we can add our own constructor though
+- whenever we add our own constructor, in a class that inherits from another class, you have to add `super` in the inheriting class and we have executing it like a function:
+```
+class ITDepartment extends Department {
+    constructor(id: string) {
+        super()
+    }
+}
+```
+- `super` calls the constructor of the base class (Department's constructor in this case)
+- it takes the arguments of the parent class constructor (id, name)
+- we have to call super() first in your constructor before we do anything with the `this` keyword - if you would add your special props, you can do that after the super()
+```
+class ITDepartment extends Department {
+    admins: string[];
+    constructor( id: string, admins: string[]) {
+        super(id, 'IT');
+        this.admins = admins;
+    }
+}
+```
+- another special Department: AccountingDepartment
