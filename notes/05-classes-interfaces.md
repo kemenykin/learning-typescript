@@ -16,7 +16,7 @@
 ### Classes & instances 
 - when we get these objects and when following this object-oriented approach, we consider split our app into such objects which manage parts of our logic
 - OBJECTS are the concrete things we work with in our code: data structures we use to store data, methods to execute methods on
-- CLASSES are "blueprints" for objects: classes allow us to define how objects should look like, which data they should hold, which methods they should have =>
+- `CLASSES are "blueprints" for (JS) objects`: classes allow us to define how objects should look like, which data they should hold, which methods they should have =>
 - so we can easily build objects based on these classes: we can call this instances of the classes (= based on classes)
 - so an object then is an instance of a class, so we can quickly replicate multiple objects with the same structure, same methods based on the same classes
 - so classes help us define how objects should look like, which properties and methods they have and so on
@@ -66,3 +66,123 @@ const accounting = new Department('Accounting');
 - this will create a new JS object based on this blueprint (class Department)
 - we can store it in a constant
 - it is a regular JS object (with Department type)
+
+## Compiling to JS
+- we can choose which way the js compiled (es5, es6)
+- different syntax, different browser support
+
+## Constructor functions & "this" keyword
+- constructor method is a utility function, which is called when you do instantiate the class
+- we can add more methods (functions) to our Department class
+```
+describe() { // define the logic of your method
+
+console.log('Department: ' + this.name);
+
+}
+```
+- `this` typically refers back to the concrete instance of this class that was created
+- with the dot (.) notation we can access all the props and methods of this instance
+- the `this` keyword when this (describe method) executes, will refer to this concrete accounting object, that was based in this class
+- `this` keyword can be tricky
+
+``This parameter``
+- it is a special instruction understood by TS
+- it's a hint regarding what this should be referred to
+```
+describe(this: Department)  // class type: Department
+    {
+    console.log('Department: ' + this.name);
+}
+```
+- when it is executes, it should always refer to an instance that's based on the department class
+
+### "private" and "public" access modifiers
+- new property of our class:
+```
+...
+name: string;
+employees: string[] = [];   // string[] type, initial value []
+...
+```
+- we can push employee to the employees array - by directly accessing the employees property (like the name prop as well)
+- one way of using your class: one uniform way of doing this
+- we don't want to be accessible like this from outside of the class
+- we can turn `employees` into a private property, a private field by adding a `private` keyword (modifier)
+- FYI: besides props, you can also mark methods as "private"
+=> employees is now a prop which is only accessible from inside the class, from inside the created object - with the `this` keyword!- so if we want to add more employees, we have to use addEmployee method (maybe with some validation process), and not simply with accounting.employees[2] = "Anna"
+- it will throw an error
+- we also have `public` next to `private` - public is default, we don't need to add 
+- public props are accessible from outside
+- JS doesn't know public and private props - TS introduces this
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Public_class_fields
+- You ensure that a "private" property is only accessible from inside a class (e.g. from inside a class method).
+
+## Shorthand initialization
+- double initialization (field definition & constructor definition as well):
+```
+class Department {
+    private name: string;
+    private id: string; 
+    private employees: string[] = [];
+
+    constructor(n: string, id: string) {
+        this.name = n;
+        this.id = id;
+    }
+}
+```
+- we can get rid of field definition, and the constructor's this.id, this.name definition =>
+- add `access modifier` in front of the parameters:
+```
+class Department {
+    private employees: string[] = [];
+
+    constructor(public name: string, private id: string) {
+
+    }
+}
+``` 
+- define easily which arguments the constructor takes, and then for every argument which has such an access modifier in front of it
+- in the describe method's body:
+```
+describe(this: Department) {
+    console.log(`Department ${this.id}: ${this.name}`);
+}
+```
+
+### Readonly modifier
+- fields that are not public or private, but they also shouldn't change after their initialization
+```
+constructor(public name: string, private readonly id: string) {
+    }
+```
+- we can write it `readonly` to the fields before the constructor, but it is shorter this way
+- it only exists in TS
+
+We can shorten this code:
+```
+class Product {
+  title: string;
+  price: number;
+  private isListed: boolean;
+ 
+  constructor(name: string, pr: number) {
+    this.title = name;
+    this.price = pr;
+    this.isListed = true;
+  }
+}
+```
+Like this:
+```
+class Product {
+    private isListed: boolean;
+
+    constructor(public title: string, public price: number) {
+        this.isListed = true;
+    }
+}
+```
+
+### Inheritance
