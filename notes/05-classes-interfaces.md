@@ -229,3 +229,108 @@ class ITDepartment extends Department {
 So:
 - `you can override methods of your base class` and you can `add your own implementation`
 - `you also have control access to properties with` protected
+
+### Getters & setters
+- lastReport is private property, we can access it from inside that method addReport(), but not from outside
+- we can add a getter to still make it accessible
+- `getter` is basically a property where you execute a function or method when you retrieve a value and that allows you (as a developer) to add more complex logic
+- `get` keyword + any name of your choice (closely related to the prop you're trying to control the access to) 
+- it is a method: it has return to something:
+```
+class AccountingDepartment extends Department {
+    private lastReport: string;
+    
+    get mostRecentReport() {
+        return this.lastReport;
+    }
+
+    constructor(id: string, private reports: string[]) {
+        super(id, 'Accounting');
+        this.lastReport = reports[0];
+    }
+
+    addReports(text: string) {
+        this.reports.push(text);
+        this.lastReport = text;
+    }
+
+    printReports() {
+        console.log(this.reports);
+    }
+}
+```
+- we encapsulate the private lastReport field, with the getter method it is publicly accessible now
+- we can call the method like this:
+```
+console.log(accounting.mostRecentReport);   // no parenthesis here!
+```
+- no () - don't execute this as a method, just access it like a normal property
+```
+get mostRecentReport() {
+        if (this.lastReport) {
+            return this.lastReport;
+        }
+        throw new Error('No report found.');
+    }
+```
+- with more complex logic above - we can access this method and executes it
+- you can also add a `setter`:
+- `set` keyword + any name of your choice (typically a name related to the prop)
+- we can use the same name as the getter method
+- but this needs to take an argument
+```
+set mostRecentReport(value: string) {
+    // you can run any logic you want to store this value
+}
+```
+- setter simply can be an alternative for the addReport method:
+```
+set mostRecentReport(value: string) {
+    if (!value) {
+        throw new Error('Please pass in a valid value!')
+    }
+    this.addReport(value);
+}
+```
+- we can call it like: 
+```
+accounting.mostRecentReport = 
+```
+- this will trigger this setter method, bc we don't execute it as a method, but simply access it like a prop
+- encapsulating logic and add extra logic that should run when you try to read a prop
+
+### Static properties & methods
+- they allow you to add props & methods to classes which are not accessed on an instance of the class
+- so where you don't need to call `new Classname` first, but which you access directly on the class
+- this is often used for utility functions
+- e.g. Math constructor function
+- it's globally available in JS, where you can acces PI as a const value, or pow()
+- these are methods & props which you don't access on the instance of Math, you don't have to call `new Math` first
+- Math acts more like a namespace, as a grouping mechanism here
+- so we can make a static method which we can access without instantiating this class:
+```
+static createEmployee(name: string) {   // static keyword
+    return { name : name }              // return an object
+}
+```
+- then we can add employee:
+```
+const employee1 = Department.createEmployee('Kinga');
+console.log(emplyee1);
+```
+- we call the static method directly on the class (Department)
+- without the `new` keyword
+- if we would like to add a static property as a new field:
+```
+static fiscalYear = 2020;
+```
+- we don't need to instatiating it, we can access it with console.log(Department.fiscalYear);
+`Important:`
+- when you add static methods or props to your class, you can't access them from inside your non-static parts
+- we can't access e.g. after the constructor because the constructor, and basically anything in there, all the methods as well which are not marked with static will NOT be able to access static props =>
+- because `.this` refers to the instance created based on the class, while the static prop is not available on instance
+- because the whole idea behind the static properties & static methods is that they're detached from instances 
+- we can't access them with `this` keyword!
+- if you would like to use the static prop or method inside the class, you would have to use the class name here to access it
+
+### Abstract classes
