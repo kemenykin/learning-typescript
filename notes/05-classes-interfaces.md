@@ -334,3 +334,88 @@ static fiscalYear = 2020;
 - if you would like to use the static prop or method inside the class, you would have to use the class name here to access it
 
 ### Abstract classes
+- you can force all classes based on our basic class to add and override a method
+- you can do so by adding the `abstract` keyword here
+- error: "Abstract methods can only appear within an abstract class."
+- if you have 1 method or more with abstract in front of the method, you have to add `abstract` in front of class Department as well
+```
+abstract class Department {
+    ...
+}
+```
+- we can rewrite the method as well, add a `void` returning type:
+```
+abstract describe(this: Department): void;
+```
+- error in the instantiated class (ITDepartment):
+- we don't offer the describe methods here, it is abstract like the Department class
+- this abstract method has to be implemented by any class based on this Department class
+- abstract can be useful if you want to enforce that all classes based on some other class share some common method or property
+- abstract classes can't instantiated with themselves (nem példányosíthatók)
+- ha van egy abstract method, az csak abstract osztályban lehet, de egy abstract osztálynak nem csak abstract methodjai lehetnek
+
+- az abstract osztály gyerekosztályának muszáj implementálnia az abstract osztály abstract methodját
+- kikötöm, hogy a belőlem (Department) öröklődő osztálynak kötelessége felülírnia az abstract methodjaimat annak érdekében, hogy egységes működési felület biztosítsak minden gyerekosztályomnak
+
+- interface-nek hívjuk azt az abstract osztályt, amelynek minden methodja abstract method és nincs fieldje
+- egy osztály bármennyi interface-t implementálhat
+- `static method:` a method you call directly on a class, not on an object created based on it
+- `inheritance:` allows you to share some common functionality and yet create more specialized blueprints
+- `abstract class`: a class that can't be instantiated but has to be extended
+
+### Singletons & Private Constructors
+#### Private constructors
+- there is a pattern in OOP: Singleton pattern
+- it ensures that you always only have exactly one instance of a certain class
+- this can be useful where you somehow can't use static methods or props or you don't want to BUT you want to make sure that you can't create multiple objects based on a class
+- but that you always have exactly one object based on a class
+- e.g. if we have only one accounting department in our company, we can use it (but if we have more IT Departments, that is already another case)
+- set constructor private, so it ensures that we can't call new on this
+- it's only accessible from inside the class
+- a static method can be called on the class itself so you don't have instantiate it for that
+- after the private constructor, we add a static method:
+```
+static getInstance () {     // name is totally up to you
+    // it will check if we already have an instance of this class, and if not, return a new one 
+}
+```
+- plus a new private static property to the field:
+```
+private static instance: AccountingDepartment;
+```
+- so we have a static method which is accessible on the class itself, but only from inside the class and the value we store in there will be of type AccountingDepartment, so of the class itself
+- now we can use this instance prop here in getInstance
+```
+getInstance() {
+    if (this.instance) {   // or AccountingDepartment.instance
+    return this.instance;
+    }
+    this.instance = new AccountingDepartment();
+    return this.instance;
+}
+```
+- the keyword `this` will refer the class itself and we can access all other static properties on that
+- `.this` inside of a static method works, it gives us access to the class itself
+- unlike if this would be a non-static method (getInstance) it woudl gives us access to the instance with which we're trying to work 
+- we are inside of this method, so we can access the private constructor, and pass in our id and string[] as arguments
+- so we either returning the one instance we might already have or if we don't have it yet we create a new one
+- this part of the code only can run once:
+```
+    this.instance = new AccountingDepartment();
+    return this.instance;
+```
+- because once we have an instance we make it into `if` block and returning the existing instance
+- if we want to work with the `AccountingDepartment`, instead of creating with instantiating, we could call the `getInstance` method
+```
+const accounting = AccountingDepartment.getInstance();
+```
+- and this returns with a new instance of the AccountingDepartment
+- if I do it again, I will get the same instance, the same object (because of the conditions, with this singleton pattern - `private keyword in front of the constructor`)
+- Singleton can be useful, but you don't need to use all the time
+#### Summary
+- `singleton classes`: a singleton class is configured such that you don't create it with "new" but by calling a method which then ensures that only one instance of the class exists at any given time
+- so you only ever have one instance of a singleton class
+
+
+### Summarize
+- classes, properties, access modifiers, methods, static methods & props, abstract methods, abstract classes, inheritance, Singleton pattern, private constructors
