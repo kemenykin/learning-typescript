@@ -456,4 +456,9 @@ let user1 = Person;
 - and it has to be the same structure as the Person interface!
 - when we assign the object to our variable, we can define the values for the properties, separated by comma (not semicolon) 
 
-
+### Interfaces vs. Types
+- type is more flexible, interface is cleaner
+- you can do with interfaces, but 
+you would only be able to do with custom type is `you can implement an interface in a class` 
+- an interface used as a contract and a class then has to adhere to:
+- e.g. we have an `interface Greetable`
