@@ -1,4 +1,4 @@
-## What are classes?
+## CLASSES - what are classes?
 ### `OOP`
 - work with real-life entities in your code
 - objects are resembling real-life objects as far as possible
@@ -419,3 +419,41 @@ const accounting = AccountingDepartment.getInstance();
 
 ### Summarize
 - classes, properties, access modifiers, methods, static methods & props, abstract methods, abstract classes, inheritance, Singleton pattern, private constructors
+
+## INTERFACES
+### What is an interface?
+- describes the structure of an object
+- we can use it to describe how an object should look like
+```
+interface Person {
+    name: string;
+    age number;
+}
+```
+- unlike the class, we will not use this as a blueprint, just as a custom type
+- we add props or field definitions and their types of the values that'll be stored in there
+- what we `don't have` here are the concrete values
+- just like in classes btw - there we also separate properties via semi-colons
+- an interface cannot have an initializer
+- we can just define the structure, not the concrete values
+- we can add method too (greet), not just as with props, we don't add the actual method, but just the structure the description: 
+##### name(anyArgument: string): return type
+```
+interface Person {
+    name: string;
+    age number;
+
+    greet(phrase: string): void;
+}
+```
+- we can use interfaces e.g. to type check an object 
+- if we have a variable, but we don't initialize immediately, we can do it like this:
+```
+let user1 = Person;
+```
+- we can use our interface as a type
+- when I assign a value to user1, it has to be an object (bc interfaces are used to define objects)
+- and it has to be the same structure as the Person interface!
+- when we assign the object to our variable, we can define the values for the properties, separated by comma (not semicolon) 
+
+
