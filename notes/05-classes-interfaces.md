@@ -457,8 +457,65 @@ let user1 = Person;
 - when we assign the object to our variable, we can define the values for the properties, separated by comma (not semicolon) 
 
 ### Interfaces vs. Types
+- when you define something as an interface, it's super clear that you want to define the structure of an object with that
+- when defining object types, you see custom types
 - type is more flexible, interface is cleaner
 - you can do with interfaces, but 
 you would only be able to do with custom type is `you can implement an interface in a class` 
-- an interface used as a contract and a class then has to adhere to:
+- an interface can be used as a contract a class can implement and a class then has to adhere to:
 - e.g. we have an `interface Greetable`
+- -   it says any object that should be treated as Greetable has to be object with a name and with a greet method
+```
+interface Greetable {
+    name: string;
+
+    greeting(text: string): void;
+}
+```
+- user1 holds a Greetable object, it will throw an error because we have more than a name and a greet method (age is assigned in the field too)
+- but we could you this interface to share it amongst possibly multiple classes we have to ensure that every class that adhere to this interface has to have a name property and has to have a greet method
+=> 
+
+### Using interfaces with classes
+- create a new class (Person)  
+- this class should basically adhere to this interface (from Greetable), it should implement this interface
+- it should follow that contract setup by this interface!
+- `implements` keyword after the class name, and the name of our interface 
+```
+class Person implements Greetable {}
+```
+- you can implement more than one interface, that is the difference compared to inheritance: you can inherit only from one class, you can implement multiple interfaces by separating them with a comma
+- we got an error: "our class incorrectlx implements the interface", if we doesn't have the name property and the greet method
+- we have set them in the Person class:
+```
+class Person implements Greetable {
+    name: string;
+
+    constructor(n: string) {
+        this.name = n;
+    }
+
+    greet() {
+        console.log(`${text} ${this.name}`);
+    }
+}
+```
+- if we have more fields in our class or more methods, but we're forced to implement this method correctly to have this name property bc we're implementing this Greetable interface
+- interfaces are often used to share functionality amongst different classes not regarding their concrete implementation
+- you can't have implementation or values inside of the interfaces
+- but regarding the structure and the features a class should have
+- it's a bit like working with abstract classes: difference is that an interface has no implementation details at all, whereas abstract classes can be a mixture of you have to overwrite these parts (abstract describe (this: Department): void) and have a concrete implementation parts (addEmployee(employee: string) {} and printEmployeeInformation method) 
+- user1 can be created by using new Person
+- so we create an object that is based on a class which implements an interface
+- you can use an interface as a type on some constant or variable which will then actually store another class of another type which in turn is based on the interface type because it implements it
+
+### Why interfaces?
+- it is useful, when we:
+- know we want to have a certain set of functionalities (e.g. a greet method) and we want to ensure that a class has such a greet method and another class has it maybe as well 
+- then we can implement an interface which forces the existence of this method
+- then we can easily share functionalities amongst classes and every class has to add its own implementation
+- this can be useful if we don'T have other parts of our code which rely on that structure 
+- we don'T care what is in the variable user1, but it has to be a greet method, we know that it has to be in there bc whatever we store in user1 - has to be Greetable
+
+### Readonly interface properties
+- 
