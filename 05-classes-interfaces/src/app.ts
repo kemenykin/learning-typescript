@@ -1,11 +1,10 @@
-interface Person {
+interface Greetable {
     name: string;
-    age: number;
 
     greeting(text: string): void;
 }
 
-let user1: Person;
+let user1: Greetable;
 
 user1 = {
     name: 'Barbie',
