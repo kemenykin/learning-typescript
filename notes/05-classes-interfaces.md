@@ -518,4 +518,75 @@ class Person implements Greetable {
 - we don'T care what is in the variable user1, but it has to be a greet method, we know that it has to be in there bc whatever we store in user1 - has to be Greetable
 
 ### Readonly interface properties
-- 
+- inside of the interface you can also add the readonly modifier - to make it clear that this property in whatever obeóject you built based on this interface must only be set once so it can't be changed after the object has been initialized
+- cannot add public or private modifier
+- we don't add readonly modifier in the class, only in the interface
+- if I try to reassign the value of the user1.name - it will throw me an error
+- interfaces have effect on the class, bc the class what implement an interface knows that implements readable, automatically assumes the prop name (what it is readonly)
+
+### Extending interfaces
+- if we have 2 interfaces and we want to all the properties
+- this forms a new interface which is in the end the interface that forces us to have a greet method, but not just that, but not just that
+- it also forces us to have everything the Name interface defines - in this case, a name property
+```
+interface Named {
+    readonly name: string;
+}
+
+interface Greetable extends Name {
+    greet(text: string): void;
+}
+```
+```
+class Person implements Greetable { 
+    name: string;   // ha ezt kitörlöm, hibát fog dobni
+    age = 30;
+    ...
+}
+```
+- mert a Person class a Greetable-t implementálja, ami pedig kibővül a Name-mel, ahol kell a name prop is
+- incorrect implementációja a Greetable-nek
+- so we can combine interfaces
+- ott hasznos, hogyha vannak objektumaink, ahol csak name propot akarunk, de más objektumoknál akarunk name-et és greet methodot is
+- some objects or some classes can just implement Named and others can implement Greetable and forced to have greet an a name
+- you can extend more than one
+- you can merge multiple interfaces into one single interface
+#### Important
+- you can't inherit from multiple classes, for interfaces that is different
+- you can indeed inherit from multiple interfaces, because in the end, they're all just getting merged together 
+
+### Interfaces as function types
+- interfaces can also be used to define the structure of a function
+- so basically as a replacement for the function types 
+- refresher: we can define the type of a function e.g. with a custom type with the `type` keyword
+```
+type AddFn = (a: number, b: number) => number;
+```
+- it should return a number and take 2 args
+- now we can create a new function here, which is a type AddFn and we don't initialize it but assign our function later:
+```
+let add: AddFn;
+
+add = (n1: number, n2: number) => {
+    return n1 + n2;
+};
+```
+- you can also use an interface as an alternative to this custom type 
+- interfaces are define the structure of an object, but in the end, functions are just objects => therefore this is a little `exeption`
+- `you can create function types with interfaces:`
+```
+interface AddFn {
+    (a: number, b: number): number;
+}
+```
+- in the end, like you would define a method (like greet method)
+- but we don't add a method name
+- we have an anonymus function in the AddFn interface
+- TS understands that you want to use this interface as a function type
+```
+let add: AddFn;
+
+add = (n1: number, n2: number) => n1 + n2;
+```
+- so if I would try to accept a string as one of the args of the function, I would get an error
+- custom type usage is more common, it's a bit shorter 
