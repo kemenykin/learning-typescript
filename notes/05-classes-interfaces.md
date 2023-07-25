@@ -590,3 +590,43 @@ add = (n1: number, n2: number) => n1 + n2;
 ```
 - so if I would try to accept a string as one of the args of the function, I would get an error
 - custom type usage is more common, it's a bit shorter 
+
+### Optional parameters & props
+- back to interfaces for objects
+- you can also define optional properties in interfaces and also in classes 
+- I create a prop `outputName`, but I don't want to force every class based on Named to have this prop interface, it should be optional (whether you want to have it or not)
+- you can specify an optional property by adding a question mark after the prop name
+- this tells TS that this prop is might exists in classes that implement this interface
+
+```
+interface Named {
+    readonly name: string;
+    outputName?: string;
+}
+```
+- you can also mark methods as `optional! => myMethod?() {...}`
+- we can set a property optional in the interface and also in the class
+it can be useful e.g. when we examine conditionals:
+```
+class Person implements Greetable {
+    name?: string;
+    age = 30;
+    constructor(n: string) {
+        // make sure that this is initialized, otherwise you get an error
+        this.name = n;
+        if (n) {
+            this.n = n;
+        }
+    }
+}
+```
+- so when we construct a new object we could do this without passing in a name
+- we can add default value in the constructor fn, or add `?` to the parameter's name (to be optional), if the default value will be undefined
+- you can also have optional parameters in functions and therefore in methods INCLUDING the constructor method
+- if the default value is not set is therefore undefined or you can default it like this (but this is optional too):
+```
+constructor(n: string = '') {}
+```
+- the default value will be assumed if you don't pass in a more specific value
+
+### Compiling interfaces to JS
