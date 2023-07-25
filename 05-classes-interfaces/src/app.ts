@@ -20,3 +20,5 @@ user1 = {
         console.log(`${text} ${this.name}`);
     },
 }
+
+console.log(add(3, 4));
