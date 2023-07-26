@@ -630,3 +630,17 @@ constructor(n: string = '') {}
 - the default value will be assumed if you don't pass in a more specific value
 
 ### Compiling interfaces to JS
+- it's a pure developer feature, it doesn't seen in JS files, only helps to write a better code
+- at runtime, no trace will be left of these interfaces
+
+Summary:
+- What's a core difference between a class and an interface?
+Interfaces can't be intantiated and are not compiled, classes can be instantiated and are compiled.
+- Which of the following example is NOT a valid use-case for an interface? You want to store a union type. That's the right choice. Interfaces describe objects (or function types) but can't store/ describe arbitrary types like union types.
+
+### Useful resources # links
+These links might also be interesting:
+
+More on (JS) Classes: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
+
+More on TS Interfaces: https://www.typescriptlang.org/docs/handbook/2/objects.html
