@@ -224,3 +224,11 @@ function size(input: string | number) {
 ```
 - In which cases is type casting helpful?
 - - You want to inform TS that a certain value is of a specific type
+
+### Useful resources, links
+
+Attached you find all the code snapshots for this module - you also find them attached to individual lectures throughout this module.
+
+These links might also be interesting:
+
+More on Advanced Types: https://www.typescriptlang.org/docs/handbook/2/types-from-types.html
