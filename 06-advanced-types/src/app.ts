@@ -78,3 +78,9 @@ function moveAnimal(animal: Animal) {
   }
   console.log(`Moving speed ${speed}`);
 }
+
+// Index types
+
+interface ErrorContainer {
+  [prop: string]: string;
+}
