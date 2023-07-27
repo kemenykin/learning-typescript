@@ -54,3 +54,27 @@ function useVehicle(vehicle: Vehicle) {
   vehicle.drive();  // both of them knows this method
   // vehicle.loadCargo(); error - only the Truck has this
 }
+
+interface Bird {
+  type: 'bird';
+  flyingspeed: number;
+}
+
+interface Horse {
+  type: 'horse';
+  runningSpeed: number;
+}
+
+type Animal = Bird | Horse;
+
+function moveAnimal(animal: Animal) {
+  let speed;
+  switch (animal.type) {
+    case 'bird':
+      speed = animal.flyingspeed;
+      break;
+    case 'horse':
+      speed = animal.runningSpeed;  
+  }
+  console.log(`Moving speed ${speed}`);
+}
