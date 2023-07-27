@@ -182,3 +182,45 @@ const errorBag: ErrorContainer = {
 - because the string is not convertable to number
 
 - this errorBag gives us this extra flexibility that we don't know in advance which prop names we want to use and how many props we need
+
+### Function overloads
+- a feature that allows us to define multiple function signatures 
+- we can have multiple possible ways of calling a function with different parameters for example, to then do something inside of that function
+- functions with the same name as our original function
+```
+function add(a: number, n: number): number;
+function add(a: string, b: string): string;
+function add(a: Combinable, b: Combinable) {}
+```
+- overloads: potential return types, how can we call the function (with different param types, different output types)
+
+- it is useful when TS not be able to correctly infer the return type on its own
+
+### Optional chaining
+- e.g. fetching user data from db
+- maybe not all data is available, which we want to work with
+```
+console.log(fetchedUserData?.job?.title);
+```
+- if something is undefined before the ?, it doesn't continue
+
+### Nullish coalescing
+- conditional display alternative
+- ?? operator
+- if the value before that is NULL or UNDEFINED (not falsy), use the fallback (second value)
+- if falsy, it prints the falsy value
+
+QUIZ
+- What's a "Type Guard"?
+- - A code pattern where you check for a certain type before you try to do something with it at runtime
+- Which of the following type guards would ensure that you get NO runtime error?
+```
+function size(input: string | number) {
+  if (typeof input === 'string') {
+    return input.length;
+  }
+  return input;
+}
+```
+- In which cases is type casting helpful?
+- - You want to inform TS that a certain value is of a specific type
