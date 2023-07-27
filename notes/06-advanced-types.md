@@ -103,3 +103,65 @@ function useVehicle(vehicle: Vehicle) {
 ```
 - it is also a JS code, executes at runtime
 - we can't use interfaces here because of they are not making JS code, and we need to runtime check (instanceof is a runtime check)
+
+### Discriminated unions
+- special type of typeguards
+- it is a pattern, makes implementing type guards easier
+- available when you work with object types
+- we have objects with different props or methods
+- we can't use the familiar type guards bc of the different objects
+- we can build a discriminated union by giving every interface
+```
+interface Bird {
+  type: 'bird'
+  flyingspeed: number;
+}
+
+interface Horse {
+  runningSpeed: number;
+}
+
+type Animal = Bird | Horse;
+
+function moveAnimal(animal: Animal) {
+  let speed;
+  switch (animal.type) {
+    case 'bird':
+      speed = animal.flyingspeed;
+      break;
+    case 'horse':
+      speed = animal.runningSpeed;  
+  }
+  console.log(`Moving speed ${speed}`);
+}
+```
+- type assignment, where we narrow down the value that may be stored in type
+- we put a value in the interface that we can check
+#### SO we have one common prop in every object that makes up our union, which describes that object - so we can use this prop that describes this object - 100% type safe
+
+### Type casting
+- helps us to tell TS that some value is of a specific type where TS is not able to detect it on its own
+- we can work with DOM elements
+- TS knows the elements, but if we add an ID to our element, TS doesn't dive deep in our HTML, it doesn't know if it belongs to a p element
+- 2 ways of type casting - 2 syntax:
+1. before element: `<HTMLInputElement>`document.getElementById('user-input');
+- In React, there is <> syntax so another version for this solution:
+2. after element: document.getElementById('user-input') `as HTMLInputElement`;
+
+! - allows us to tell TS that the expression in front of it will never yield
+- we use it when select something from the DOM that might return null
+
+```
+HTML document:
+const userInput = document.getElementById('user-input);
+
+if (userInputElement) {
+  (userInputElement as HTMLInputElement).value = 'Hi there!';
+}
+```
+- we can check in runtime as well, like above (not in the HTML code with !, <> or as)
+
+#### Index properties
+
+- a feature that allows us to create objects which are more flexible regarding the props they might hold
+- e.g. validations on input fields
