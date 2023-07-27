@@ -165,3 +165,20 @@ if (userInputElement) {
 
 - a feature that allows us to create objects which are more flexible regarding the props they might hold
 - e.g. validations on input fields
+```
+interface ErrorContainer {
+  [prop: string]: string;
+}
+```
+- I want an object that have a prop which is a string, and its values is a string
+- We can make an object 
+```
+const errorBag: ErrorContainer = {
+  email: 'Not a valid email'; // we can assign only string type value (prop name)
+}
+```
+- we can use number type prop, bc it can be converted to string
+- but the opposite not [prop: number]: string;
+- because the string is not convertable to number
+
+- this errorBag gives us this extra flexibility that we don't know in advance which prop names we want to use and how many props we need
